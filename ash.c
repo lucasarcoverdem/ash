@@ -74,6 +74,13 @@ int exbicmd(char **args) // EXecute Built In CoMmanDs
         cmd_help();
     }
 
+    if (strcmp(args[0], "goto") == 0 || strcmp(args[0], "gt") == 0 || strcmp(args[0], "cd") == 0)
+    {
+        char *dir;
+        dir = args[1];
+        cmd_goto(dir);
+    }
+
     return 0;
 }
 
