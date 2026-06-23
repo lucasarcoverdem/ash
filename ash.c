@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "builtin.h"
+
 #define MAX_INPUT_LEN 1024
 #define MAX_ARGS_QTD 64
 
@@ -56,22 +58,6 @@ void parse_input(char *input, char **args)
         i++;
         args[i] = strtok(NULL, " ");
     }
-}
-
-/*************
-BUILT-IN CMDS|
-*************/
-void cmd_exit()
-{
-    printf("\nExiting...\n");
-    exit(0);
-}
-
-void cmd_help()
-{
-    printf("\nBuilt-In commands: \n");
-    printf("exit             exit ash.\n");
-    printf("help             display this help message.\n");
 }
 
 int exbicmd(char **args) // EXecute Built In CoMmanDs
