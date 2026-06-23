@@ -58,21 +58,34 @@ void parse_input(char *input, char **args)
     }
 }
 
+/*************
+BUILT-IN CMDS|
+*************/
+void cmd_exit()
+{
+    printf("\nExiting...\n");
+    exit(0);
+}
+
+void cmd_help()
+{
+    printf("\nBuilt-In commands: \n");
+    printf("exit             exit ash.\n");
+    printf("help             display this help message.\n");
+}
+
 int exbicmd(char **args) // EXecute Built In CoMmanDs
 {
     if (args[0] == NULL) return 1;
 
     if (strcmp(args[0], "exit") == 0)
     {
-        printf("\nExiting...\n");
-        exit(0);
+        cmd_exit();
     }
 
     if (strcmp(args[0], "help") == 0)
     {
-        printf("\nBuilt-In commands: \n");
-        printf("exit             exit ash.\n");
-        printf("help             display this help message.\n");
+        cmd_help();
     }
 
     return 0;
