@@ -1,4 +1,14 @@
 #include <stdio.h>
+#include <unistd.h>
+
+char login[256]; // "username"
+
+// get user login
+void get_login()
+{
+    login[255] = '\0';
+    getlogin_r(login, sizeof(login));
+}
 
 void print_banner()
 {
@@ -14,7 +24,9 @@ void print_banner()
 
 int main(void)
 {
+    get_login();
     print_banner();
+    
     return 0;
 }
 
