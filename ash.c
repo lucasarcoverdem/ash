@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAX_INPUT_LEN 1024
 
 char login[256]; // "username"
 char cwd[1024]; // Current Working Directory
@@ -26,7 +30,19 @@ void print_login_and_cwd()
     get_login();
     get_cwd();
 
-    printf("%s at %s: \n", login, cwd);
+    printf("%s at %s:", login, cwd);
+}
+
+void get_input(char *input)
+{
+    printf("\n> ");
+    if (fgets(input, MAX_INPUT_LEN, stdin) == NULL)
+    {
+        printf("\nExiting...\n");
+        exit(0);
+    }
+
+    input[strcspn(input, "\n")] = 0;
 }
 
 void print_banner()
@@ -43,8 +59,15 @@ void print_banner()
 
 int main(void)
 {
+    char input[MAX_INPUT_LEN];
+
     print_banner();
-    print_login_and_cwd();
+
+    while (1)
+    {
+        print_login_and_cwd();
+        get_input(input);
+    }
     
     return 0;
 }
