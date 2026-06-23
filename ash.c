@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #define MAX_INPUT_LEN 1024
+#define MAX_ARGS_QTD 64
 
 char login[256]; // "username"
 char cwd[1024]; // Current Working Directory
@@ -45,6 +46,18 @@ void get_input(char *input)
     input[strcspn(input, "\n")] = 0;
 }
 
+void parse_input(char *input, char **args)
+{
+    int i = 0;
+    args[i] = strtok(input, " ");
+
+    while (args[i] != NULL && i < MAX_ARGS_QTD - 1)
+    {
+        i++;
+        args[i] = strtok(NULL, " ");
+    }
+}
+
 void print_banner()
 {
     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
@@ -60,6 +73,7 @@ void print_banner()
 int main(void)
 {
     char input[MAX_INPUT_LEN];
+    char *args[MAX_ARGS_QTD];
 
     print_banner();
 
@@ -67,6 +81,7 @@ int main(void)
     {
         print_login_and_cwd();
         get_input(input);
+        parse_input(input, args);
     }
     
     return 0;
