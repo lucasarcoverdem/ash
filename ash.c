@@ -31,7 +31,7 @@ void print_login_and_cwd()
     get_login();
     get_cwd();
 
-    printf("%s at %s:", login, cwd);
+    printf("\n%s at %s:", login, cwd);
 }
 
 void get_input(char *input)
@@ -58,6 +58,26 @@ void parse_input(char *input, char **args)
     }
 }
 
+int exbicmd(char **args) // EXecute Built In CoMmanDs
+{
+    if (args[0] == NULL) return 1;
+
+    if (strcmp(args[0], "exit") == 0)
+    {
+        printf("\nExiting...\n");
+        exit(0);
+    }
+
+    if (strcmp(args[0], "help") == 0)
+    {
+        printf("\nBuilt-In commands: \n");
+        printf("exit             exit ash.\n");
+        printf("help             display this help message.\n");
+    }
+
+    return 0;
+}
+
 void print_banner()
 {
     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
@@ -67,7 +87,7 @@ void print_banner()
     printf("|                    a shell                     |\n");
     printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
 
-    printf("\n                 Welcome to ASH!\n\n");
+    printf("\n                 Welcome to ASH!\n");
 }
 
 int main(void)
@@ -82,6 +102,7 @@ int main(void)
         print_login_and_cwd();
         get_input(input);
         parse_input(input, args);
+        exbicmd(args);
     }
     
     return 0;
