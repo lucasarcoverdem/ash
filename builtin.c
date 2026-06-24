@@ -14,6 +14,8 @@ void cmd_help()
     printf("\nBuilt-In commands: \n");
     printf("exit              exit ash.\n");
     printf("help              print this help message.\n");
+    printf("goto <dir>        change directory.\n");
+    printf("          ash also supports cmds 'gt' and 'cd'.\n");
 }
 
 void cmd_goto(char *dir)
