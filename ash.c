@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 #include "builtin.h"
 
@@ -60,7 +61,7 @@ void parse_input(char *input, char **args)
     }
 }
 
-int exbicmd(char **args) // EXecute Built In CoMmanDs
+int exbicmd(char **args) // execute built-in commands
 {
     if (args[0] == NULL) return 1;
 
@@ -82,6 +83,23 @@ int exbicmd(char **args) // EXecute Built In CoMmanDs
     }
 
     return 0;
+}
+
+void execmd(char **args) // execute externel commands
+{
+    pid_t pid = fork(); // creates a child process
+    
+    if(pid == 0)
+    {
+        if (execvp(args[0], args) < 0) // execute cmd
+        {
+            perror("\nError: command failed!");
+        }
+        exit(1);
+    }
+    else {
+        wait(NULL); //parent waits child finish
+    }
 }
 
 void print_banner()
@@ -108,7 +126,9 @@ int main(void)
         print_login_and_cwd();
         get_input(input);
         parse_input(input, args);
-        exbicmd(args);
+
+        if (exbicmd(args)) continue;
+        execmd(args);
     }
     
     return 0;
