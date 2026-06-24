@@ -73,6 +73,7 @@ int exbicmd(char **args) // execute built-in commands
     if (strcmp(args[0], "help") == 0)
     {
         cmd_help();
+        return 1;
     }
 
     if (strcmp(args[0], "goto") == 0 || strcmp(args[0], "gt") == 0 || strcmp(args[0], "cd") == 0)
@@ -80,6 +81,7 @@ int exbicmd(char **args) // execute built-in commands
         char *dir;
         dir = args[1];
         cmd_goto(dir);
+        return 1;
     }
 
     return 0;

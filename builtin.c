@@ -16,6 +16,11 @@ void cmd_help()
     printf("help              print this help message.\n");
     printf("goto <dir>        change directory.\n");
     printf("          ash also supports cmds 'gt' and 'cd'.\n");
+    printf("-----------------------------------------------\n");
+    printf("Or use any other external command. e.g.:\n");
+    printf("ls                list directory.\n");
+    printf("echo <str>        print text.\n");
+    printf("etc....\n");
 }
 
 void cmd_goto(char *dir)
